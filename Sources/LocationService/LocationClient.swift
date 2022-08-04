@@ -16,7 +16,7 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     
     
-    func checkLocationServicesEnabled() -> Bool {
+    public func checkLocationServicesEnabled() -> Bool {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
@@ -27,14 +27,14 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     }
     
     
-    func getLocation() -> String? {
+    public func getLocation() -> String? {
         guard let location = locationManager?.location?.coordinate else { return nil }
         let lat = String(describing: location.latitude)
         let long = String(describing:location.longitude)
         return lat+","+long
     }
     
-    private func checkLocationAuthorization() {
+    public func checkLocationAuthorization() {
          guard let locationManager = locationManager else {
              return
          }
@@ -55,11 +55,11 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     
     
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
     }
 }
