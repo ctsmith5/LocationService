@@ -10,7 +10,7 @@ import CoreLocation
 
 
 @available(iOS 14.0, *)
-class LocationClient: NSObject, CLLocationManagerDelegate {
+public class LocationClient: NSObject, CLLocationManagerDelegate {
     
     
     var locationManager: CLLocationManager?
