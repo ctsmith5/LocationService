@@ -8,6 +8,8 @@
 import Foundation
 import CoreLocation
 
+
+@available(iOS 14.0, *)
 class LocationClient: NSObject, CLLocationManagerDelegate {
     
     
