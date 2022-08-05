@@ -25,7 +25,9 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
             locationManager?.requestWhenInUseAuthorization()
         }
     }
-    
+    public func startUpdatingLocation() {
+        startUpdatingLocation()
+    }
     
     public func getLocation() -> String? {
         guard let location = locationManager?.location?.coordinate else { return nil }
