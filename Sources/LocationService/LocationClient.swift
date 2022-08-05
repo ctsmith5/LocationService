@@ -20,8 +20,8 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     public func checkLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
             locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            startUpdatingLocation()
+            locationManager!.delegate = self
+            locationManager!.startUpdatingLocation()
         } else {
             locationManager?.requestWhenInUseAuthorization()
         }
