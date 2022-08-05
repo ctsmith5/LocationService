@@ -15,6 +15,7 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager?
     
+    public var velocity: Double = 0.0
     
     public func checkLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
@@ -52,13 +53,13 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
          
      }
     
-    
-    
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        if let lastLocation = locations.last  {
+            self.velocity = lastLocation.speed.magnitude
+        }
     }
 }
