@@ -16,13 +16,12 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     
     
-    public func checkLocationServicesEnabled() -> Bool {
+    public func checkLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
-            return true
         } else {
-            return false
+            locationManager?.requestWhenInUseAuthorization()
         }
     }
     
