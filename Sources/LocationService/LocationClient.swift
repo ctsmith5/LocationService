@@ -21,12 +21,13 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
+            startUpdatingLocation()
         } else {
             locationManager?.requestWhenInUseAuthorization()
         }
     }
     public func startUpdatingLocation() {
-        startUpdatingLocation()
+ 
     }
     
     public func getLocation() -> String? {
