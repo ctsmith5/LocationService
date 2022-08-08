@@ -16,6 +16,7 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     
     public var velocity: Double = 0.0
+    public var address: String = ""
     
     public func checkLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
@@ -28,10 +29,12 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     }
     
     public func getLocation() -> String? {
-        guard let location = locationManager?.location?.coordinate else { return nil }
-        let lat = String(describing: location.latitude)
-        let long = String(describing:location.longitude)
-        return lat+","+long
+        let geocoder = CLGeocoder()
+        guard let location = locationManager?.location else { return nil }
+        geocoder.reverseGeocodeLocation(location) { place, error in
+            self.address = place?.first?.subLocality ?? "Nilly"
+        }
+        return String(describing: location.coordinate.latitude) + "," + String(describing: location.coordinate.longitude)
     }
     
     public func checkLocationAuthorization() {
