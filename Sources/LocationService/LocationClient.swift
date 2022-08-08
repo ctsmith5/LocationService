@@ -32,7 +32,7 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
         let geocoder = CLGeocoder()
         guard let location = locationManager?.location else { return nil }
         geocoder.reverseGeocodeLocation(location) { place, error in
-            self.address = place?.first?.subLocality ?? "Nilly"
+            self.address = "\(String(describing: place))"
         }
         return String(describing: location.coordinate.latitude) + "," + String(describing: location.coordinate.longitude)
     }
