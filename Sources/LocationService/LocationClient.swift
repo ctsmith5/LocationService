@@ -16,7 +16,6 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     
     public var velocity: Double = 0.0
-    public var address: String = ""
     
     public func checkLocationServicesEnabled() {
         if CLLocationManager.locationServicesEnabled(), locationManager == nil {
@@ -29,12 +28,25 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     }
     
     public func getLocation() -> String? {
-        let geocoder = CLGeocoder()
         guard let location = locationManager?.location else { return nil }
-        geocoder.reverseGeocodeLocation(location) { place, error in
-            self.address = String(describing: place)
-        }
         return String(describing: location.coordinate.latitude) + "," + String(describing: location.coordinate.longitude)
+    }
+    
+    public func getStreetAddress() async -> String {
+        let geocoder = CLGeocoder()
+        guard let location = locationManager?.location else {
+            checkLocationAuthorization()
+            return "badddd address"
+        }
+        var returnStringForAddress = ""
+        do {
+            try await returnStringForAddress = geocoder.reverseGeocodeLocation(location).first?.name! ?? "Async Error"
+        } catch {
+            //handling errors here
+            print("error here")
+        }
+       
+        return returnStringForAddress
     }
     
     public func checkLocationAuthorization() {
