@@ -75,7 +75,6 @@ public class LocationClient: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lastLocation = locations.last  {
             self.velocity = lastLocation.speed.magnitude
-            self.streetAddress = self.getStreetAddress()
         }
     }
 }
